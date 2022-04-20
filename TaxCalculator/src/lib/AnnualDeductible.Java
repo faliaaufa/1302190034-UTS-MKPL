@@ -1,21 +1,27 @@
 package lib;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
+import java.util.Date;
+
 public class AnnualDeductible extends MonthlySalary{
-    private int yearJoined;
-    private int monthJoined;
-    private int dayJoined;
+    private Year yearJoined;
+    private Month monthJoined;
+    private Date dayJoined;
     private int monthWorkingInYear;
     private MonthlySalary income;
     private HaveSpouse spouse;
     private HaveChild child;
     
     public int getAnnualIncomeTax() {
-    //Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
+    //Menghitung berapa lama pegawai bekerja dalam setahun ini
 	LocalDate date = LocalDate.now();		
-	if (date.getYear() == yearJoined) {
-            monthWorkingInYear = date.getMonthValue() - monthJoined;
+	if (date.getYear() == Integer.parseInt(yearJoined.toString())) {
+        monthWorkingInYear = date.getMonthValue() - Integer.parseInt(monthJoined.toString());
 	}else {
-            monthWorkingInYear = 12;
+        //jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
+        monthWorkingInYear = 12;
 	}		
 	return TaxFunction.calculateTax(
             income.getMonthlySalary(), 
