@@ -1,28 +1,36 @@
 package lib;
 public class monthlySalary extends HaveSpouse{
+    // Tipe kewarganegaraan
+    private enum Citizens{
+        foreign, local
+    }
 
     private int monthlySalary;
     private int otherMonthlyIncome;
     private int annualDeductible;
-    private boolean isForeigner;
 
-    public void setMonthlySalary(int grade) {	
-        if (grade == 1) {
+   private void setMonthlySalary(int grade, Citizens citizen) {	
+        int grade_1 = 1;
+        int grade_2 = 1;
+        int grade_3 = 1;
+        if (grade == grade_1) {
             monthlySalary = 3000000;
-            if (isForeigner) {
-                monthlySalary = (int) (3000000 * 1.5);
-            }
-	    }else if (grade == 2) {
+            isForeigner(citizen, monthlySalary);
+	    }else if (grade == grade_2) {
             monthlySalary = 5000000;
-            if (isForeigner) {
-                monthlySalary = (int) (3000000 * 1.5);
-            }
-	    }else if (grade == 3) {
+            isForeigner(citizen, monthlySalary);
+	    }else if (grade == grade_3) {
             monthlySalary = 7000000;
-            if (isForeigner) {
-                monthlySalary = (int) (3000000 * 1.5);
-            }
+            isForeigner(citizen, monthlySalary);
         }
+    }
+
+    private int isForeigner(Citizens citizen, int monthlySalary){
+        if (citizen == Citizens.foreign){
+            monthlySalary = (int) (3000000 * 1.5);
+            return monthlySalary;
+        }
+        return monthlySalary;
     }
 
     public void setAnnualDeductible(int deductible) {	
