@@ -10,26 +10,39 @@ public class TaxFunction {
         int income_notTaxableMarried = 54000000 + 4500000;
         int income_notTaxableChild = 1500000;
 		
-		if (numberOfMonthWorking > 12) {
-			System.err.println("More than 12 month working per year");
-		}
-		
-		if (numberOfChildren > 3) {
-			numberOfChildren = 3;
-		}
-		
 		if (isMarried) {
 			tax = (int) Math.round(0.05 * (net_income - (income_notTaxableMarried+ (numberOfChildren * income_notTaxableChild))));
 		}else {
 			tax = (int) Math.round(0.05 * (income_notTaxableMarried - income_notTaxable));
 		}
+
+		printMonthOfWork(numberOfMonthWorking);
 		
-		if (tax < 0) {
-			return 0;
-		}else {
-			return tax;
-		}
-			 
+		haveChild(numberOfChildren);
+		
+		return printTax(tax);
 	}
+
+	private static String printMonthOfWork(int numberOfMonthWorking){
+        if (numberOfMonthWorking > 12) {
+            return "More than 12 month working per year";
+		}
+        return "";
+    }
+    
+    private static int haveChild(int numberOfChildren){
+        if (numberOfChildren > 3) {
+            return numberOfChildren = 3;
+		}
+        return numberOfChildren;
+    }
+    
+    private static int printTax(int tax){
+        if (tax < 0) {
+            return 0;
+		}else {
+				return tax;
+		}
+    }
 	
 }
